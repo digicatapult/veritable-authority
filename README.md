@@ -6,6 +6,8 @@ Front-end for an authority in Veritable. Issue licenses, verify licenses and vie
 
 ## Getting started
 
+Follow the README in [main repo](https://github.com/digicatapult/fly2plan-poc) to start the cloudagent and von-network.
+
 To start the application, run:
 
 ```sh
