@@ -31,13 +31,11 @@ export default function AppCore() {
     const setStoreDataFn = (resData) => {
       setData(resData)
     }
-    console.log(data)
     setConfiguredOrigin(insertedOrigin)
     if (insertedOrigin !== '') {
       startFetchHandler(insertedOrigin, setStoreDataFn)
     }
   }
-  console.log(data)
   return (
     <>
       <NavbarWrap>
