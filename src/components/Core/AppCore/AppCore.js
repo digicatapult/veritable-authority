@@ -83,11 +83,7 @@ export default function AppCore() {
         )}
       </ConnectivityAndBreadcrumbWrap>
       <ContentSelectorWrap>
-        <ContentSelector
-          status={status}
-          origin={configuredOrigin}
-          persona={data.label}
-        />
+        <ContentSelector status={status} origin={configuredOrigin} />
       </ContentSelectorWrap>
       {status === 'error' && <ErrorModal visibility content={error} />}
     </>
