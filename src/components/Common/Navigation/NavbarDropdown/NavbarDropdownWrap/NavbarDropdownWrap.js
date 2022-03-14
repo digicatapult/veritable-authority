@@ -6,10 +6,10 @@ import { useState } from 'react'
 
 import NavbarDropdownMultilineBtn from '../NavbarDropdownMultilineBtn'
 import NavbarDropdownForm from '../NavbarDropdownForm'
+import { API_HOST, API_PORT } from '../../../../../utils/env.js'
 
 export default function NavbarDropdown({ status, onSaveOrigin }) {
-  const defaultPort = '8021'
-  const defaultOrigin = `http://localhost:${defaultPort}`
+  const defaultOrigin = `http://${API_HOST}:${API_PORT}`
   const [origin, setOrigin] = useState(defaultOrigin)
   const [isVisible, setIsVisible] = useState(status === 'idle')
 
@@ -87,7 +87,7 @@ export default function NavbarDropdown({ status, onSaveOrigin }) {
             style={{ minWidth: '320px' }}
           >
             <NavbarDropdownForm
-              defaultPort={defaultPort}
+              defaultPort={API_PORT}
               defaultOrigin={defaultOrigin}
               origin={origin}
               submitHandler={onSubmit}
