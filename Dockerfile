@@ -19,11 +19,11 @@ FROM node:$NODE_VERSION AS runtime
 RUN npm -g install npm@8.x.x
 
 WORKDIR /veritable-authority
-ENV PORT 3004
+ENV PORT 3000
 
 COPY --from=build /veritable-authority/build .
 
 RUN npm install -g serve
 
-EXPOSE 3004
+EXPOSE 3000
 CMD ["serve", "/veritable-authority"]
