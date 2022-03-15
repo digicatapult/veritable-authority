@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: ['feat/release-workflow']
+    branches: ['main']
 
 jobs:
   preconditions:
