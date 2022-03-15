@@ -14,7 +14,7 @@ export default function NavbarNavigationMenu({ status }) {
           <i className="fa fa-spinner fa-pulse fa-fw text-light"></i>
         )}
         {status === 'fetched' && (
-          <a className="nav-link" onClick={(e) => e.preventDefault()} href="#/">
+          <a className="nav-link" onClick={(e) => e.preventDefault()} href="./">
             HOME
           </a>
         )}

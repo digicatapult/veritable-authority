@@ -3,7 +3,6 @@
  * @returns A form with two dropdown accordion cards.
  */
 export default function NavbarDropdownForm({
-  defaultAgName,
   defaultPort,
   defaultOrigin,
   origin,
@@ -22,7 +21,7 @@ export default function NavbarDropdownForm({
             <button
               className="btn btn-link p-0 text-primary"
               type="button"
-              href="#/"
+              href="./"
               data-toggle="collapse"
               data-target="#collapsing01"
               aria-expanded="true"
@@ -40,7 +39,7 @@ export default function NavbarDropdownForm({
             <div className="card-body py-0">
               <div className="input-group input-group-sm">
                 <label className="w-100 justify-content-start">
-                  Predefined Endpoint – {defaultAgName} ({defaultPort})
+                  Predefined Endpoint – Authority ({defaultPort})
                 </label>
                 <input
                   className="form-control"
@@ -52,7 +51,7 @@ export default function NavbarDropdownForm({
                   <button
                     onClick={clickSwitchToDefaultHandler}
                     className="btn btn-primary btn-small w-100 small mb-3 mt-2"
-                    href="#/"
+                    href="./"
                   >
                     Switch to CustomEndpoint
                   </button>
@@ -67,7 +66,7 @@ export default function NavbarDropdownForm({
               <button
                 className="btn btn-link p-0 text-primary collapsed"
                 type="button"
-                href="#/"
+                href="./"
                 data-toggle="collapse"
                 data-target="#collapsing02"
                 aria-expanded="false"
@@ -100,7 +99,7 @@ export default function NavbarDropdownForm({
                   <div className="w-100">
                     <button
                       className="btn btn-primary btn-small w-100 small mb-3 mt-2"
-                      href="#/"
+                      href="./"
                     >
                       Switch to Custom
                     </button>

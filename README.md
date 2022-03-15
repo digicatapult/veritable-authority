@@ -6,6 +6,8 @@ Front-end for an authority in Veritable. Issue licenses, verify licenses and vie
 
 ## Getting started
 
+Follow the README in the [demo repo](https://github.com/digicatapult/veritable-poc) to start the cloudagent and von-network.
+
 To start the application, run:
 
 ```sh

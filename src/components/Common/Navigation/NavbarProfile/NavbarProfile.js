@@ -17,7 +17,7 @@ export default function NavbarProfile({ status, data }) {
           <a
             className="nav-link navbar-brand"
             onClick={(e) => e.preventDefault()}
-            href="#/"
+            href="./"
           >
             <i className="fa fa-md fa-user-circle-o" />
             <span className="text-capitalize small">

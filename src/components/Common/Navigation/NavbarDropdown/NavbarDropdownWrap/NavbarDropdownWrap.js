@@ -6,12 +6,10 @@ import { useState } from 'react'
 
 import NavbarDropdownMultilineBtn from '../NavbarDropdownMultilineBtn'
 import NavbarDropdownForm from '../NavbarDropdownForm'
+import { API_HOST, API_PORT } from '../../../../../utils/env.js'
 
-export default function NavbarDropdown({ status, agent, onSaveOrigin }) {
-  const defaultAgName =
-    agent === '2' ? 'User' : agent === '3' ? 'Verifier' : 'Issuer'
-  const defaultPort = agent === '2' ? '8031' : agent === '3' ? '8041' : '8021'
-  const defaultOrigin = `http://localhost:${defaultPort}`
+export default function NavbarDropdown({ status, onSaveOrigin }) {
+  const defaultOrigin = `http://${API_HOST}:${API_PORT}`
   const [origin, setOrigin] = useState(defaultOrigin)
   const [isVisible, setIsVisible] = useState(status === 'idle')
 
@@ -37,7 +35,7 @@ export default function NavbarDropdown({ status, agent, onSaveOrigin }) {
           <a
             className="nav-link"
             data-toggle="dropdown"
-            href="#/"
+            href="./"
             role="button"
             onClick={clickDropdownHandler}
             aria-haspopup="true"
@@ -51,12 +49,12 @@ export default function NavbarDropdown({ status, agent, onSaveOrigin }) {
           </a>
         )}
         {status === 'error' && (
-          <a className="nav-link disabled" href="#/" aria-expanded="false">
+          <a className="nav-link disabled" href="./" aria-expanded="false">
             <span>&nbsp;</span>
           </a>
         )}
         {status === 'fetching' && (
-          <a className="nav-link disabled" href="#/" aria-expanded="false">
+          <a className="nav-link disabled" href="./" aria-expanded="false">
             <NavbarDropdownMultilineBtn
               line01=" "
               line02=" "
@@ -69,7 +67,7 @@ export default function NavbarDropdown({ status, agent, onSaveOrigin }) {
           <a
             className="nav-link disabled text-light"
             data-toggle="dropdown"
-            href="#/"
+            href="./"
             role="button"
             onClick={(e) => e.stopPropagation()}
             aria-haspopup="true"
@@ -89,8 +87,7 @@ export default function NavbarDropdown({ status, agent, onSaveOrigin }) {
             style={{ minWidth: '320px' }}
           >
             <NavbarDropdownForm
-              defaultAgName={defaultAgName}
-              defaultPort={defaultPort}
+              defaultPort={API_PORT}
               defaultOrigin={defaultOrigin}
               origin={origin}
               submitHandler={onSubmit}

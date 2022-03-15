@@ -24,7 +24,7 @@ export default function ErrorModal({ children, visibility, content }) {
           </div>
           <div className="modal-footer" data-dismiss="modal">
             <button
-              href="#/"
+              href="./"
               onClick={clickReloadHandler}
               type="button"
               className="btn btn-danger"

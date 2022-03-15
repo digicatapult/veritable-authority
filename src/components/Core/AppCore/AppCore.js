@@ -18,7 +18,7 @@ import ConnectivityWrap from '../../Common/Navigation/Connectivity/ConnectivityW
 import ContentSelectorWrap from '../../Common/Misc/ContentSelectorWrap'
 import ContentSelector from '../../Common/Misc/ContentSelector'
 
-export default function AppCore({ agent }) {
+export default function AppCore() {
   const [configuredOrigin, setConfiguredOrigin] = useState('')
   const [data, setData] = useState({})
   const [status, error, startFetchHandler] = useGetServerStatus()
@@ -36,16 +36,14 @@ export default function AppCore({ agent }) {
       startFetchHandler(insertedOrigin, setStoreDataFn)
     }
   }
-
   return (
     <>
       <NavbarWrap>
-        <LogoWrap agent={agent} />
+        <LogoWrap />
         {status === 'idle' && !error && (
           <>
             <NavbarDropdownWrap
               status={status}
-              agent={agent}
               onSaveOrigin={saveOriginHandler}
             />
             <NavbarNavigationMenu status={status} />
@@ -54,42 +52,34 @@ export default function AppCore({ agent }) {
         )}
         {status === 'error' && (
           <>
-            <NavbarDropdownWrap status={status} agent={agent} />
+            <NavbarDropdownWrap status={status} />
             <NavbarNavigationMenu status={status} />
             <NavbarProfile status={status} />
           </>
         )}
         {status === 'fetching' && !error && (
           <>
-            <NavbarDropdownWrap status={status} agent={agent} />
+            <NavbarDropdownWrap status={status} />
             <NavbarNavigationMenu status={status} />
             <NavbarProfile status={status} />
           </>
         )}
         {status === 'fetched' && !error && (
           <>
-            <NavbarDropdownWrap status={status} agent={agent} />
+            <NavbarDropdownWrap status={status} />
             <NavbarNavigationMenu status={status} />
             <NavbarProfile status={status} data={data} />
           </>
         )}
       </NavbarWrap>
       <ConnectivityAndBreadcrumbWrap>
-        <BreadcrumbWrap status={status} persona={data.label} />
+        <BreadcrumbWrap status={status} />
         {status === 'fetched' && (
-          <ConnectivityWrap
-            serverStatus={status}
-            origin={configuredOrigin}
-            persona={data.label}
-          />
+          <ConnectivityWrap serverStatus={status} origin={configuredOrigin} />
         )}
       </ConnectivityAndBreadcrumbWrap>
       <ContentSelectorWrap>
-        <ContentSelector
-          status={status}
-          origin={configuredOrigin}
-          persona={data.label}
-        />
+        <ContentSelector status={status} origin={configuredOrigin} />
       </ContentSelectorWrap>
       {status === 'error' && <ErrorModal visibility content={error} />}
     </>

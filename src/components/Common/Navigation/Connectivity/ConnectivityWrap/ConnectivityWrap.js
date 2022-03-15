@@ -12,14 +12,7 @@ import usePostConnCreateInvitation from '../../../../../interface/hooks/use-post
 import usePostConnReceiveInvitation from '../../../../../interface/hooks/use-post-conn-receive-invitation'
 import useDeleteConnections from '../../../../../interface/hooks/use-delete-connections'
 
-export default function ConnectivityWrap({
-  children,
-  serverStatus,
-  origin,
-  persona,
-}) {
-  const personaPrefix = persona?.toLowerCase().replace('.agent', '')
-
+export default function ConnectivityWrap({ children, serverStatus, origin }) {
   const [dataConnections, setDataConnections] = useState(null)
   const [statusConnections, errorConnections, startGetConnectionsHandler] =
     useGetLoopedConn()
@@ -47,7 +40,7 @@ export default function ConnectivityWrap({
     e.stopPropagation()
     const setStoreDataFn = (resData) => setInvitationData(resData)
     if (statusCreateInv !== 'fetching' || statusCreateInv !== 'error') {
-      startCreateInvHandler(origin, personaPrefix, setStoreDataFn)
+      startCreateInvHandler(origin, setStoreDataFn)
     }
   }
 
@@ -56,13 +49,7 @@ export default function ConnectivityWrap({
     const setStatusValFn = (statusVal) => setStatusReceiveInv(statusVal)
     const setStoreDataFn = (resData) => setLastConnId(resData)
     if (statusReceiveInv !== 'fetching' || statusReceiveInv !== 'error') {
-      startReceiveInvHandler(
-        origin,
-        pasted,
-        personaPrefix,
-        setStatusValFn,
-        setStoreDataFn
-      )
+      startReceiveInvHandler(origin, pasted, setStatusValFn, setStoreDataFn)
       setPasted('')
     }
   }
@@ -99,7 +86,7 @@ export default function ConnectivityWrap({
                       <a
                         className="text-primary"
                         data-toggle="dropdown"
-                        href="#/"
+                        href="./"
                         role="button"
                       >
                         <ConnectionsActiveCount data={dataConnections} />
@@ -129,7 +116,7 @@ export default function ConnectivityWrap({
                   <a
                     className="nav-link p-1 m-1 bg-primary text-light"
                     data-toggle="dropdown"
-                    href="#/"
+                    href="./"
                     role="button"
                     aria-haspopup="false"
                   >
@@ -145,7 +132,7 @@ export default function ConnectivityWrap({
                         <button
                           className="btn btn-primary w-100"
                           onClick={clickCreateInvHandler}
-                          type="submit"
+                          type="button"
                         >
                           <i className="fa fa-plus-square-o fa-fw" />
                           &nbsp;Create Invitation{' '}
@@ -171,7 +158,7 @@ export default function ConnectivityWrap({
                         <button
                           className="btn btn-primary w-100"
                           onClick={clickReceiveInvitationHandler}
-                          type="submit"
+                          type="button"
                         >
                           <i className="fa fa-floppy-o fa-fw" />
                           &nbsp;Receive Invitation{' '}
@@ -227,7 +214,7 @@ export default function ConnectivityWrap({
               <div className="modal-footer" data-dismiss="modal">
                 <button
                   onClick={toggleSuccessShowHandler}
-                  href="#/"
+                  href="./"
                   type="button"
                   className="btn btn-primary"
                 >

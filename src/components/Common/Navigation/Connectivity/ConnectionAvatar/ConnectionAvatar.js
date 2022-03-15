@@ -63,7 +63,7 @@ export default function ConnectionAvatar({ data, onDelete }) {
               <div className="btn-group">
                 <a
                   className="p-1 m-1 text-primary bg-light"
-                  href="#/"
+                  href="./"
                   data-toggle="dropdown"
                   aria-expanded="false"
                 >
