@@ -12,9 +12,9 @@ export default function usePostCredentialDefinitions() {
   const [status, setStatus] = useState(statusOptions[0])
   const [error, setError] = useState(null)
   const onStartFetch = useCallback(
-    (fetchOrigin, selectedSchemaId, persona, setStoreData) => {
+    (fetchOrigin, selectedSchemaId, alias, setStoreData) => {
       const params = {}
-      const createBody = (selectedSchemaId, persona) => {
+      const createBody = (selectedSchemaId, alias) => {
         const supportRevocation = false
         const sanitizeTitleWUnderscore = (str) => {
           const space = new RegExp(' ', 'g')
@@ -24,7 +24,7 @@ export default function usePostCredentialDefinitions() {
         const schemaId = selectedSchemaId
         const schemaDefName = schemaId.split(':')[2]
         const schemaDefTagName = sanitizeTitleWUnderscore(schemaDefName)
-        const schemaDefTagPrefix = `${persona}.agent`
+        const schemaDefTagPrefix = `${alias.toLowerCase()}.agent`
         const credDefTag = `${schemaDefTagPrefix}.${schemaDefTagName}`
         const did = schemaId.split(':')[0]
         const definitionBody = {
@@ -35,7 +35,7 @@ export default function usePostCredentialDefinitions() {
         }
         return definitionBody
       }
-      const body = createBody(selectedSchemaId, persona)
+      const body = createBody(selectedSchemaId, alias)
       post(
         fetchOrigin,
         path,

@@ -11,15 +11,9 @@ import useGetLoopedConn from '../../../../../interface/hooks/use-get-looped-conn
 import usePostConnCreateInvitation from '../../../../../interface/hooks/use-post-conn-create-invitation'
 import usePostConnReceiveInvitation from '../../../../../interface/hooks/use-post-conn-receive-invitation'
 import useDeleteConnections from '../../../../../interface/hooks/use-delete-connections'
+import { ALIAS } from '../../../../../utils/env.js'
 
-export default function ConnectivityWrap({
-  children,
-  serverStatus,
-  origin,
-  persona,
-}) {
-  const personaPrefix = persona?.toLowerCase().replace('.agent', '')
-
+export default function ConnectivityWrap({ children, serverStatus, origin }) {
   const [dataConnections, setDataConnections] = useState(null)
   const [statusConnections, errorConnections, startGetConnectionsHandler] =
     useGetLoopedConn()
@@ -47,7 +41,7 @@ export default function ConnectivityWrap({
     e.stopPropagation()
     const setStoreDataFn = (resData) => setInvitationData(resData)
     if (statusCreateInv !== 'fetching' || statusCreateInv !== 'error') {
-      startCreateInvHandler(origin, personaPrefix, setStoreDataFn)
+      startCreateInvHandler(origin, ALIAS, setStoreDataFn)
     }
   }
 
@@ -59,7 +53,7 @@ export default function ConnectivityWrap({
       startReceiveInvHandler(
         origin,
         pasted,
-        personaPrefix,
+        ALIAS,
         setStatusValFn,
         setStoreDataFn
       )
@@ -171,7 +165,7 @@ export default function ConnectivityWrap({
                         <button
                           className="btn btn-primary w-100"
                           onClick={clickReceiveInvitationHandler}
-                          type="submit"
+                          type="button"
                         >
                           <i className="fa fa-floppy-o fa-fw" />
                           &nbsp;Receive Invitation{' '}

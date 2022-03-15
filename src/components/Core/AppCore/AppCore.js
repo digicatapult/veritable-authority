@@ -75,11 +75,7 @@ export default function AppCore() {
       <ConnectivityAndBreadcrumbWrap>
         <BreadcrumbWrap status={status} />
         {status === 'fetched' && (
-          <ConnectivityWrap
-            serverStatus={status}
-            origin={configuredOrigin}
-            persona={data.label}
-          />
+          <ConnectivityWrap serverStatus={status} origin={configuredOrigin} />
         )}
       </ConnectivityAndBreadcrumbWrap>
       <ContentSelectorWrap>
