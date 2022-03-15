@@ -11,7 +11,6 @@ import useGetLoopedConn from '../../../../../interface/hooks/use-get-looped-conn
 import usePostConnCreateInvitation from '../../../../../interface/hooks/use-post-conn-create-invitation'
 import usePostConnReceiveInvitation from '../../../../../interface/hooks/use-post-conn-receive-invitation'
 import useDeleteConnections from '../../../../../interface/hooks/use-delete-connections'
-import { ALIAS } from '../../../../../utils/env.js'
 
 export default function ConnectivityWrap({ children, serverStatus, origin }) {
   const [dataConnections, setDataConnections] = useState(null)
@@ -41,7 +40,7 @@ export default function ConnectivityWrap({ children, serverStatus, origin }) {
     e.stopPropagation()
     const setStoreDataFn = (resData) => setInvitationData(resData)
     if (statusCreateInv !== 'fetching' || statusCreateInv !== 'error') {
-      startCreateInvHandler(origin, ALIAS, setStoreDataFn)
+      startCreateInvHandler(origin, setStoreDataFn)
     }
   }
 
@@ -50,13 +49,7 @@ export default function ConnectivityWrap({ children, serverStatus, origin }) {
     const setStatusValFn = (statusVal) => setStatusReceiveInv(statusVal)
     const setStoreDataFn = (resData) => setLastConnId(resData)
     if (statusReceiveInv !== 'fetching' || statusReceiveInv !== 'error') {
-      startReceiveInvHandler(
-        origin,
-        pasted,
-        ALIAS,
-        setStatusValFn,
-        setStoreDataFn
-      )
+      startReceiveInvHandler(origin, pasted, setStatusValFn, setStoreDataFn)
       setPasted('')
     }
   }

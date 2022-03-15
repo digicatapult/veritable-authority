@@ -19,18 +19,8 @@ export default function usePostConnCreateInvitation() {
   const [status, setStatus] = useState(statusOptions[0])
   const [error, setError] = useState(null)
 
-  const onStartCreateInv = useCallback((origin, alias, setStoreData) => {
-    const body = { my_label: alias.toLowerCase() }
-    post(
-      origin,
-      path,
-      {},
-      body,
-      setStatus,
-      setError,
-      setStoreData,
-      transformData
-    )
+  const onStartCreateInv = useCallback((origin, setStoreData) => {
+    post(origin, path, {}, {}, setStatus, setError, setStoreData, transformData)
   }, [])
 
   return [status, error, onStartCreateInv]

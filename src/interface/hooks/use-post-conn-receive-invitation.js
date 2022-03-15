@@ -14,12 +14,12 @@ export default function usePostConnReceiveInvitation() {
   const [error, setError] = useState(null)
 
   const onStartReceiveInv = useCallback(
-    (origin, body, alias, setStatusVal, setStoreData) => {
+    (origin, body, setStatusVal, setStoreData) => {
       const bodyB64 = body
       const bodyBuffer = Buffer.from(bodyB64, 'base64')
       body = bodyBuffer.toString()
-      const label = JSON.parse(body).label
-      const params = { alias: `${alias}2${label}`.toLowerCase() }
+      const label = JSON.parse(body).label.toLowerCase()
+      const params = { alias: `connection to ${label}` }
       post(
         origin,
         path,
