@@ -1,6 +1,5 @@
 /**
- * This function is used to render the breadcrumb for the Agent Issuer, Agent
- * Holder, and Agent Verifier pages
+ * This function is used to wrap the breadcrumb for the page
  * @returns A breadcrumb.
  */
 import Breadcrumb from '../../../AgentAuthority/Breadcrumb'

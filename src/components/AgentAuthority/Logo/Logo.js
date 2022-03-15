@@ -1,5 +1,5 @@
 /**
- * This function renders the logo of the issuer page.
+ * This function renders the logo of the page.
  * @returns A wrapper div with a svg image
  */
 export default function Logo() {

@@ -1,5 +1,5 @@
 /**
- * This function returns a breadcrumb for the issuer page
+ * This function returns a breadcrumb for the page
  * @returns A breadcrumb element.
  */
 export default function Breadcrumb() {
