@@ -17,35 +17,6 @@ export default function usePostIssueCredentialSendOffer() {
     return nameValueArr
   }
 
-  const createBody = (connectionId, credDefId, id, type, expiry) => {
-    const CRED_PREVIEW_TYPE =
-      'https://didcomm.org/issue-credential/2.0/credential-preview'
-
-    const getTimestamp = () => {
-      const timestamp = new Date() / 1000
-      return timestamp.toFixed()
-    }
-
-    const credAttrs = {
-      id: id,
-      type: type,
-      expiration_dateint: expiry,
-      timestamp: getTimestamp(),
-    }
-
-    return {
-      connection_id: connectionId,
-      comment: `Offer on cred def id ${credDefId}`,
-      auto_remove: false,
-      credential_preview: {
-        '@type': CRED_PREVIEW_TYPE,
-        attributes: convertToNameValueArr(credAttrs),
-      },
-      filter: { indy: { cred_def_id: credDefId } },
-      trace: false,
-    }
-  }
-
   const onStartFetch = useCallback(
     (
       origin,
@@ -57,6 +28,35 @@ export default function usePostIssueCredentialSendOffer() {
       setStoreStatus,
       setStoreData
     ) => {
+      const createBody = (connectionId, credDefId, id, type, expiry) => {
+        const CRED_PREVIEW_TYPE =
+          'https://didcomm.org/issue-credential/2.0/credential-preview'
+
+        const getTimestamp = () => {
+          const timestamp = new Date() / 1000
+          return timestamp.toFixed()
+        }
+
+        const credAttrs = {
+          id: id,
+          type: type,
+          expiration_dateint: expiry,
+          timestamp: getTimestamp(),
+        }
+
+        return {
+          connection_id: connectionId,
+          comment: `Offer on cred def id ${credDefId}`,
+          auto_remove: false,
+          credential_preview: {
+            '@type': CRED_PREVIEW_TYPE,
+            attributes: convertToNameValueArr(credAttrs),
+          },
+          filter: { indy: { cred_def_id: credDefId } },
+          trace: false,
+        }
+      }
+
       const params = {}
       const body = createBody(connectionId, credDefId, id, type, expiry)
       post(

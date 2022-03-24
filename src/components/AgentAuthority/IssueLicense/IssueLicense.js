@@ -1,5 +1,5 @@
 /**
- * Listens for verified presentation proofs and issues a license
+ * Polls for verified presentation proofs and issues a license, then deletes the proof
  */
 import { useEffect, useState } from 'react'
 import moment from 'moment'

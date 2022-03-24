@@ -6,14 +6,14 @@
 import ColumnLeftWrap from '../ColumnLeft/ColumnLeftWrap'
 import ColumnRightWrap from '../ColumnRight/ColumnRightWrap'
 
-import ProofRequest from '../RequestProof'
+import RequestProof from '../RequestProof'
 import Verify from '../Verify'
 import IssueLicense from '../IssueLicense'
 
 export default function ContentWrap({ origin }) {
   return (
     <>
-      <ProofRequest origin={origin} />
+      <RequestProof origin={origin} />
       <Verify origin={origin} />
       <IssueLicense origin={origin} />
       <ColumnLeftWrap origin={origin} />
