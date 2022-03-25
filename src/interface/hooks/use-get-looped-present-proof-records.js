@@ -21,7 +21,7 @@ export default function useGetLoopedPresentProofRecords() {
         setStoreData,
         transformData
       )
-    }, 3000)
+    }, 1000)
     return intervalId
   }, [])
   return [status, error, onStartFetch]
