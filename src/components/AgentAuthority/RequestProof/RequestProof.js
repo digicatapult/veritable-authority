@@ -16,7 +16,6 @@ export default function RequestProof({ origin }) {
 
   useEffect(() => {
     const sendRequests = (proposals) => {
-      console.log(proposals)
       proposals.forEach((proposal) => {
         startFetchHandlerRequest({
           origin,
