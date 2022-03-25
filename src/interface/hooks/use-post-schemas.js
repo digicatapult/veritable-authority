@@ -19,7 +19,13 @@ export default function usePostSchemas() {
       return {
         schema_name: schemaName,
         schema_version: version(),
-        attributes: ['id', 'type', 'expiration_dateint', 'timestamp'],
+        attributes: [
+          'id',
+          'type',
+          'expiration_dateint',
+          'timestamp',
+          'test_cert_referent',
+        ],
       }
     }
 

@@ -19,37 +19,39 @@ export default function IssueLicense({ origin }) {
 
   useEffect(() => {
     const sendCredOffers = (verifiedProofs) => {
-      verifiedProofs.forEach((verified) => {
-        const {
-          by_format: {
-            pres: {
-              indy: {
-                requested_proof: { revealed_attrs: attributes },
+      if (licenseCredDefId) {
+        verifiedProofs.forEach((verified) => {
+          const {
+            by_format: {
+              pres: {
+                indy: {
+                  requested_proof: { revealed_attrs: attributes },
+                },
               },
             },
-          },
-        } = verified
+          } = verified
+          const expiry = moment().add(2, 'years').format('YYYYMMDD')
 
-        const expiry = moment().add(2, 'years').format('YYYYMMDD')
-
-        startFetchHandlerCredOffer(
-          origin,
-          verified.connection_id,
-          licenseCredDefId,
-          attributes['0_id_uuid'].raw,
-          attributes['0_type_uuid'].raw,
-          expiry,
-          () => {},
-          () => {
-            startDeleteHandler(
-              origin,
-              verified.pres_ex_id,
-              () => {},
-              () => {}
-            )
-          }
-        )
-      })
+          startFetchHandlerCredOffer(
+            origin,
+            verified.connection_id,
+            licenseCredDefId,
+            attributes['0_id_uuid'].raw,
+            attributes['0_type_uuid'].raw,
+            expiry,
+            verified.pres_request.comment,
+            () => {},
+            () => {
+              startDeleteHandler(
+                origin,
+                verified.pres_ex_id,
+                () => {},
+                () => {}
+              )
+            }
+          )
+        })
+      }
     }
     const intervalIdFetch = startGetRecordsHandler(
       origin,

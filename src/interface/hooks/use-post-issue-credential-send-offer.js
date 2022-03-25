@@ -25,10 +25,18 @@ export default function usePostIssueCredentialSendOffer() {
       id,
       type,
       expiry,
+      testCertReferent,
       setStoreStatus,
       setStoreData
     ) => {
-      const createBody = (connectionId, credDefId, id, type, expiry) => {
+      const createBody = (
+        connectionId,
+        credDefId,
+        id,
+        type,
+        expiry,
+        testCertReferent
+      ) => {
         const CRED_PREVIEW_TYPE =
           'https://didcomm.org/issue-credential/2.0/credential-preview'
 
@@ -42,6 +50,7 @@ export default function usePostIssueCredentialSendOffer() {
           type: type,
           expiration_dateint: expiry,
           timestamp: getTimestamp(),
+          test_cert_referent: testCertReferent,
         }
 
         return {
@@ -58,7 +67,14 @@ export default function usePostIssueCredentialSendOffer() {
       }
 
       const params = {}
-      const body = createBody(connectionId, credDefId, id, type, expiry)
+      const body = createBody(
+        connectionId,
+        credDefId,
+        id,
+        type,
+        expiry,
+        testCertReferent
+      )
       post(
         origin,
         path,
