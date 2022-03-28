@@ -6,9 +6,12 @@
 import ColumnLeftWrap from '../ColumnLeft/ColumnLeftWrap'
 import ColumnRightWrap from '../ColumnRight/ColumnRightWrap'
 
+import IssueLicense from '../IssueLicense'
+
 export default function ContentWrap({ origin }) {
   return (
     <>
+      <IssueLicense origin={origin} />
       <ColumnLeftWrap origin={origin} />
       <ColumnRightWrap origin={origin} />
     </>

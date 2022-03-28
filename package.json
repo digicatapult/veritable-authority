@@ -1,6 +1,6 @@
 {
   "name": "veritable-authority",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Front-end for Veritable authority",
   "author": "Digital Catapult (https://www.digicatapult.org.uk/)",
   "license": "Apache-2.0",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "buffer": "^6.0.3",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-json-view": "^1.21.3",
