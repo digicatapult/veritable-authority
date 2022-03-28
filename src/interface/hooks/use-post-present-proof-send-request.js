@@ -5,11 +5,10 @@ import { useCallback, useState } from 'react'
 import post from '../api/helpers/post'
 
 export default function usePostPresentProofSendRequest() {
-  const [inflight, setInflight] = useState(new Set())
-
   const path = '/present-proof-2.0/send-request'
 
   const [error, setError] = useState(null)
+  const [status, setStatus] = useState('idle')
 
   const createBody = (comment, connectionId, proposal, validity) => {
     const reqPrs4zkProofs = [
@@ -41,42 +40,24 @@ export default function usePostPresentProofSendRequest() {
   }
 
   const onStartFetch = useCallback(
-    ({
-      origin,
-      comment,
-      connectionId,
-      proposal,
-      validity,
-      setStatus,
-      setStoreData,
-    }) => {
-      if (!inflight.has(proposal.pres_ex_id)) {
-        setInflight((prev) => new Set(prev.add(proposal.pres_ex_id)))
+    (origin, comment, connectionId, proposal, validity, setStoreData) => {
+      const params = {}
+      const body = createBody(comment, connectionId, proposal, validity)
 
-        const params = {}
-        const body = createBody(comment, connectionId, proposal, validity)
+      const transformData = (retrievedData) => retrievedData.pres_ex_id
 
-        const transformData = (retrievedData) => {
-          setInflight(
-            (prev) =>
-              new Set([...prev].filter((id) => id != proposal.pres_ex_id))
-          )
-          return retrievedData.pres_ex_id
-        }
-
-        post(
-          origin,
-          path,
-          params,
-          body,
-          setStatus,
-          setError,
-          setStoreData,
-          transformData
-        )
-      }
+      post(
+        origin,
+        path,
+        params,
+        body,
+        setStatus,
+        setError,
+        setStoreData,
+        transformData
+      )
     },
-    [inflight]
+    []
   )
-  return [error, onStartFetch]
+  return [status, error, onStartFetch]
 }

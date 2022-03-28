@@ -1,62 +1,28 @@
-/**
- * Polls for verified presentation proofs and issues a license, then deletes the proof
- */
 import { useEffect, useState } from 'react'
-import moment from 'moment'
 import LicenseCredDef from '../LicenseCredDef'
+import useIssueLicense from '../../../interface/hooks/use-issue-license'
 import useGetLoopedPresentProofRecords from '../../../interface/hooks/use-get-looped-present-proof-records'
-import usePostIssueCredentialSendOffer from '../../../interface/hooks/use-post-issue-credential-send-offer'
-import useDeleteRecord from '../../../interface/hooks/use-delete-record'
 import Error from '../../Common/Misc/Error'
 
 export default function IssueLicense({ origin }) {
   const [licenseCredDefId, setLicenseCredDefId] = useState('')
+  const [statusIssue, errorIssue, startIssueLicense] = useIssueLicense()
   const [statusRecords, errorRecords, startGetRecordsHandler] =
     useGetLoopedPresentProofRecords()
-  const [errorIssueCred, startFetchHandlerCredOffer] =
-    usePostIssueCredentialSendOffer()
-  const [errorDelete, startDeleteHandler] = useDeleteRecord()
 
   useEffect(() => {
-    const sendCredOffers = (verifiedProofs) => {
-      if (licenseCredDefId) {
-        verifiedProofs.forEach((verified) => {
-          const {
-            by_format: {
-              pres: {
-                indy: {
-                  requested_proof: { revealed_attrs: attributes },
-                },
-              },
-            },
-          } = verified
-          const expiry = moment().add(2, 'years').format('YYYYMMDD')
-
-          startFetchHandlerCredOffer(
-            origin,
-            verified.connection_id,
-            licenseCredDefId,
-            attributes['0_id_uuid'].raw,
-            attributes['0_type_uuid'].raw,
-            expiry,
-            verified.pres_request.comment,
-            () => {},
-            () => {
-              startDeleteHandler(
-                origin,
-                verified.pres_ex_id,
-                () => {},
-                () => {}
-              )
-            }
-          )
-        })
-      }
+    const issueLicenses = (proposals) => {
+      proposals.forEach((proposal) => {
+        if (licenseCredDefId) {
+          startIssueLicense(origin, proposal, licenseCredDefId)
+        }
+      })
     }
+
     const intervalIdFetch = startGetRecordsHandler(
       origin,
-      'done',
-      sendCredOffers
+      'proposal-received',
+      issueLicenses
     )
     if (statusRecords !== 'started') clearInterval(intervalIdFetch)
     return function clear() {
@@ -65,11 +31,11 @@ export default function IssueLicense({ origin }) {
   }, [
     origin,
     statusRecords,
-    startFetchHandlerCredOffer,
     startGetRecordsHandler,
     licenseCredDefId,
-    startDeleteHandler,
+    startIssueLicense,
   ])
+  console.log(statusIssue)
 
   return (
     <>
@@ -77,7 +43,7 @@ export default function IssueLicense({ origin }) {
         origin={origin}
         setLicenseCredDefId={setLicenseCredDefId}
       />
-      <Error errors={[errorIssueCred, errorRecords, errorDelete]} />
+      <Error errors={[errorRecords, errorIssue]} />
     </>
   )
 }

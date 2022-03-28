@@ -8,6 +8,7 @@ export default function usePostIssueCredentialSendOffer() {
   const path = '/issue-credential-2.0/send-offer'
   const transformData = (retrievedData) => retrievedData.cred_ex_id
   const [error, setError] = useState(null)
+  const [status, setStatus] = useState('idle')
 
   const convertToNameValueArr = (obj) => {
     const nameValueArr = []
@@ -26,7 +27,6 @@ export default function usePostIssueCredentialSendOffer() {
       type,
       expiry,
       testCertReferent,
-      setStoreStatus,
       setStoreData
     ) => {
       const createBody = (
@@ -80,7 +80,7 @@ export default function usePostIssueCredentialSendOffer() {
         path,
         params,
         body,
-        setStoreStatus,
+        setStatus,
         setError,
         setStoreData,
         transformData
@@ -88,5 +88,5 @@ export default function usePostIssueCredentialSendOffer() {
     },
     []
   )
-  return [error, onStartFetch]
+  return [status, error, onStartFetch]
 }

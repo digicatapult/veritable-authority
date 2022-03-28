@@ -6,13 +6,11 @@
 import ColumnLeftWrap from '../ColumnLeft/ColumnLeftWrap'
 import ColumnRightWrap from '../ColumnRight/ColumnRightWrap'
 
-import RequestProof from '../RequestProof'
 import IssueLicense from '../IssueLicense'
 
 export default function ContentWrap({ origin }) {
   return (
     <>
-      <RequestProof origin={origin} />
       <IssueLicense origin={origin} />
       <ColumnLeftWrap origin={origin} />
       <ColumnRightWrap origin={origin} />
