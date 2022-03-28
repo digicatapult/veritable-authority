@@ -3,13 +3,14 @@
  * Finally issues a license and deletes the proof
  */
 import { useState, useCallback } from 'react'
-import delay from 'delay'
 import moment from 'moment'
 
 import usePostPresentProofSendRequest from './use-post-present-proof-send-request'
 import useGetPresentProofRecord from './use-get-present-proof-records'
 import usePostIssueCredentialSendOffer from './use-post-issue-credential-send-offer'
 import useDeleteRecord from './use-delete-record'
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 export default function useIssueLicense() {
   const [inflight, setInflight] = useState(new Set())

@@ -3,8 +3,7 @@
  */
 import { useCallback, useState } from 'react'
 import post from '../api/helpers/post'
-/* {"schema_name":"drone schema","schema_version":"1.91","attributes":["id","name","surname","type","title",
-"subtitle","expiration_dateint","timestamp"]} */
+
 export default function usePostSchemas() {
   const path = '/schemas'
   const transformData = (retrievedData) => retrievedData.schema_id

@@ -4,6 +4,15 @@
 import { useCallback, useState } from 'react'
 import post from '../api/helpers/post'
 
+// dateStr should be in format YYYY-MM-DD
+const dateStrToNum = (dateStr) => {
+  const [yearStr, monthStr, dayStr] = dateStr.split('-')
+  const year = parseInt(yearStr, 10),
+    month = parseInt(monthStr, 10),
+    day = parseInt(dayStr, 10)
+  return year * 100 * 100 + month * 100 + day
+}
+
 export default function usePostPresentProofSendRequest() {
   const path = '/present-proof-2.0/send-request'
 
@@ -11,11 +20,11 @@ export default function usePostPresentProofSendRequest() {
   const [status, setStatus] = useState('idle')
 
   const createBody = (comment, connectionId, proposal, validity) => {
-    const reqPrs4zkProofs = [
+    const predicates = [
       {
         name: 'expiration_dateint',
         p_type: '>=',
-        p_value: validity.split('-').join('') * 1,
+        p_value: dateStrToNum(validity),
         restrictions: [{ schema_name: 'drone schema' }],
       },
     ]
@@ -29,7 +38,7 @@ export default function usePostPresentProofSendRequest() {
           version: proposal.version,
           requested_attributes: proposal.requested_attributes,
           requested_predicates: Object.fromEntries(
-            reqPrs4zkProofs.map((e) => [`0_${e.name}_GE_uuid`, e])
+            predicates.map((e) => [`0_${e.name}_GE_uuid`, e])
           ),
         },
       },

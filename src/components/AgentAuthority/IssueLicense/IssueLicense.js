@@ -1,14 +1,24 @@
 import { useEffect, useState } from 'react'
-import LicenseCredDef from '../LicenseCredDef'
+import { AUTHORITY_LABEL, LICENSE_SCHEMA_NAME } from '../../../utils/env.js'
+
 import useIssueLicense from '../../../interface/hooks/use-issue-license'
 import useGetLoopedPresentProofRecords from '../../../interface/hooks/use-get-looped-present-proof-records'
+import useGetCredDefinitionsCreated from '../../../interface/hooks/use-get-cred-definitions-created'
+import usePostSchemas from '../../../interface/hooks/use-post-schemas'
+import usePostCredentialDefinitions from '../../../interface/hooks/use-post-credential-definitions'
+
 import Error from '../../Common/Misc/Error'
 
 export default function IssueLicense({ origin }) {
   const [licenseCredDefId, setLicenseCredDefId] = useState('')
-  const [statusIssue, errorIssue, startIssueLicense] = useIssueLicense()
+  const [, errorIssue, startIssueLicense] = useIssueLicense()
   const [statusRecords, errorRecords, startGetRecordsHandler] =
     useGetLoopedPresentProofRecords()
+  const [errorDefinitionsCreated, startFetchHandlerDefinitionsCreated] =
+    useGetCredDefinitionsCreated()
+
+  const [errorPostSchema, startPostSchema] = usePostSchemas()
+  const [errorPostCredDefs, startPostCredDef] = usePostCredentialDefinitions()
 
   useEffect(() => {
     const issueLicenses = (proposals) => {
@@ -35,15 +45,44 @@ export default function IssueLicense({ origin }) {
     licenseCredDefId,
     startIssueLicense,
   ])
-  console.log(statusIssue)
+
+  useEffect(() => {
+    startFetchHandlerDefinitionsCreated(origin, (credDefIds) => {
+      const licenseCredDefId = credDefIds.find((credDefId) =>
+        credDefId.includes(LICENSE_SCHEMA_NAME)
+      )
+      if (licenseCredDefId) {
+        setLicenseCredDefId(licenseCredDefId)
+      } else {
+        startPostSchema(origin, LICENSE_SCHEMA_NAME, (schemaId) => {
+          startPostCredDef(
+            origin,
+            schemaId,
+            AUTHORITY_LABEL,
+            setLicenseCredDefId
+          )
+        })
+      }
+    })
+  }, [
+    origin,
+    startFetchHandlerDefinitionsCreated,
+    startPostSchema,
+    startPostCredDef,
+    setLicenseCredDefId,
+  ])
 
   return (
     <>
-      <LicenseCredDef
-        origin={origin}
-        setLicenseCredDefId={setLicenseCredDefId}
+      <Error
+        errors={[
+          errorRecords,
+          errorIssue,
+          errorDefinitionsCreated,
+          errorPostSchema,
+          errorPostCredDefs,
+        ]}
       />
-      <Error errors={[errorRecords, errorIssue]} />
     </>
   )
 }

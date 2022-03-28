@@ -14,14 +14,9 @@ export default function usePostCredentialDefinitions() {
       const params = {}
       const createBody = (schemaId, persona) => {
         const supportRevocation = false
-        const sanitizeTitleWUnderscore = (str) => {
-          const space = new RegExp(' ', 'g')
-          str = str.replace(space, '_')
-          return str
-        }
 
         const schemaDefName = schemaId.split(':')[2]
-        const schemaDefTagName = sanitizeTitleWUnderscore(schemaDefName)
+        const schemaDefTagName = schemaDefName.replace(/\s+/g, '_')
         const schemaDefTagPrefix = `${persona}.agent`
         const credDefTag = `${schemaDefTagPrefix}.${schemaDefTagName}`
         const did = schemaId.split(':')[0]

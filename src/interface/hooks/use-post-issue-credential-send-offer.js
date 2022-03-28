@@ -4,19 +4,17 @@
 import { useCallback, useState } from 'react'
 import post from '../api/helpers/post'
 
+const convertToNameValueArr = (obj) =>
+  Object.entries(obj).reduce((acc, [name, value]) => {
+    acc.push({ name, value })
+    return acc
+  }, [])
+
 export default function usePostIssueCredentialSendOffer() {
   const path = '/issue-credential-2.0/send-offer'
   const transformData = (retrievedData) => retrievedData.cred_ex_id
   const [error, setError] = useState(null)
   const [status, setStatus] = useState('idle')
-
-  const convertToNameValueArr = (obj) => {
-    const nameValueArr = []
-    for (const [name, value] of Object.entries(obj)) {
-      nameValueArr.push({ name, value })
-    }
-    return nameValueArr
-  }
 
   const onStartFetch = useCallback(
     (
