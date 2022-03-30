@@ -1,4 +1,4 @@
-name: TestLinting
+name: Branch
 
 on:
   push:
@@ -10,46 +10,23 @@ on:
         type: boolean
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-20.04
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Set Node.js 16.x
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-
       - name: Install dependencies
-        run: |
-          npm ci
-
+        run: npm ci
       - name: Run lint
-        run: |
-          npm run lint
-
+        run: npm run lint
+      - name: Run component tests
+        run: npm t
       - name: Print tag if present
         run: |
           echo "Tags: $TAGS"
         env:
           TAGS: ${{ github.event.inputs.tags }}
-          
-  check-version:
-    name: 'Check version'
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - run: git fetch --depth=1 --tags origin
-      - name: Install yq
-        run: sudo snap install yq
-      - name: Check Build Version
-        id: get_version
-        run: ./scripts/check-version.sh
-        shell: bash
-      - name: Error if version is not increased
-        shell: bash
-        run: |
-          exit $([[ "${{steps.get_version.outputs.IS_NEW_VERSION}}" = "true" ]] && echo 0 || echo 1)
