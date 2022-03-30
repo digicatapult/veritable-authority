@@ -2,7 +2,9 @@
 
 ## Description
 
-Front-end for an authority in Veritable. Issue licenses, verify licenses and view license holders.
+Front-end for a Regulator ( Safe2Fly ) in Veritable. Issue licenses, verify licenses and view license that have been previously created holders.
+
+---
 
 ## Getting started
 
@@ -14,6 +16,7 @@ To start the application, run:
 npm start
 ```
 
+<<<<<<< HEAD
 ## Testing
                                                                                                                                           
 > Framework - [CYPRESS](https://docs.cypress.io/)                                                                                         
@@ -48,6 +51,8 @@ npm run test:dev
 #### TODO
 - [ ] - include **integration** tests as part of github checks
 
+=======
+>>>>>>> main
 ---
 
 ## Interacting with the ACA Swagger API Layer directly
@@ -67,3 +72,5 @@ To connect to a custom backend: when first opening the GUI, instead of clicking 
 All the React components / sub-components, in this project are developed using the _folders-as-components_ methodology (this methodology is described in detail here **[NodeJsOrg article](https://nodejs.org/dist/latest-v7.x/docs/api/modules.html#modules_folders_as_modules)**).
 
 That means that every existing React component here has its own folder with an _index.js_ file and the component itself. This makes importing components more elegant. In addition, certain components are grouped inside folders and sub-folders.
+
+---
