@@ -13,27 +13,6 @@ function mockAgentEndpoints(url) {
     },
     { fixture: 'agent-status.json'}
   ).as('agentStatus')
-  cy.intercept(
-    {
-      method: 'GET',
-      url: `${url}/connections?`,
-    },
-    { results: []}
-  ).as('agentConnections')
-  cy.intercept(
-    {
-      method: 'GET',
-      url: `${url}/credentials?`,
-    },
-    { results: []}
-  ).as('agentCredentials')
-  cy.intercept(
-    {
-      method: 'GET',
-      url: `${url}/resent-proof-2.0/records?`,
-    },
-    { results: []}
-  ).as('agentRecords')
 }
 
 describe('Integration tests for Authority UI', () => {
@@ -47,13 +26,9 @@ describe('Integration tests for Authority UI', () => {
     mockAgentEndpoints(url)
   })
 
-  describe('happy path', () => {
+  describe('connection to an agent', () => {
     beforeEach(() => {
       cy.visit('/')
-    })
-
-    it('renders DOM', () => {
-      cy.get('#root').should('exist')
     })
     
     describe('if agent does not respond', () => {
@@ -61,22 +36,17 @@ describe('Integration tests for Authority UI', () => {
         cy.intercept('GET', `${url}/status?`, { forceNetworkError: true }).as('agentStatusErr')
         cy.get('[data-cy=switch-to-custom-endpoint]').click()
         cy.wait('@agentStatusErr').should('have.property', 'error')
-          // assert for modal etc
-          // cy.get('[data-cy=modal-server-error]')
-          //   .should('exist')
-          //   .contains(networkErrorMessage)
       })
     })
-    
-    describe('connection to agent', () => {
-      beforeEach(() => {
-        cy.get('[data-cy=switch-to-custom-endpoint]').click()
-      })
 
-      it('retrieves agent \'s status from \`/status?\` endpoint', () => {
-        cy.wait('@agentStatus').then(({ response }) => {
-          assert.equal(response.statusCode, 200) 
-        })
+    it('renders DOM', () => {
+      cy.get('#root').should('exist')
+    })
+    
+    it('retrieves agent \'s status from \`/status?\` endpoint', () => {
+      cy.get('[data-cy=switch-to-custom-endpoint]').click()
+      cy.wait('@agentStatus').then(({ response }) => {
+        assert.equal(response.statusCode, 200) 
       })
     })
   })
