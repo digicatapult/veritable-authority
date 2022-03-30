@@ -12,6 +12,9 @@ export default function LogoWrap({ children }) {
       onClick={(e) => e.preventDefault()}
     >
       <Logo />
+      <span>
+        <span className="small">&nbsp;</span>
+      </span>
       {children && children}
     </a>
   )
