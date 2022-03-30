@@ -1,3 +1,7 @@
 node_modules
 build
 package.json
+cypress/
+
+**/*.spec.js
+**/*.test.js

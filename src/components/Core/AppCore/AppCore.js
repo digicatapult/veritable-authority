@@ -37,7 +37,7 @@ export default function AppCore() {
     }
   }
   return (
-    <>
+    <div data-cy="app-core">
       <NavbarWrap>
         <LogoWrap />
         {status === 'idle' && !error && (
@@ -82,6 +82,6 @@ export default function AppCore() {
         <ContentSelector status={status} origin={configuredOrigin} />
       </ContentSelectorWrap>
       {status === 'error' && <ErrorModal visibility content={error} />}
-    </>
+    </div>
   )
 }
