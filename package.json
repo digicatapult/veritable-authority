@@ -21,6 +21,10 @@
     "react-scripts": "^5.0.1"
   },
   "overrides": {
+    "flux": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
     "react-json-view": {
       "react": "$react",
       "react-dom": "$react-dom"
