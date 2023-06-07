@@ -15,18 +15,22 @@
   "dependencies": {
     "buffer": "^6.0.3",
     "moment": "^2.29.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-json-view": "^1.21.3",
     "react-scripts": "^5.0.1"
+  },
+  "overrides": {
+    "react-json-view": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --ext .js . --fix",
-    "test:dev": "npx cypress open-ct",
-    "test": "npx cypress run-ct --spec 'src/**/*'",
     "test:integration": "npx cypress run",
     "eject": "react-scripts eject"
   },
@@ -45,9 +49,6 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.21.8",
     "@babel/preset-react": "^7.22.3",
-    "@cypress/react": "^7.0.3",
-    "@cypress/webpack-dev-server": "^3.4.1",
-    "cypress": "^12.13.0",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-cypress": "^2.13.3",
