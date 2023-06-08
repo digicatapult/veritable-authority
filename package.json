@@ -1,6 +1,6 @@
 {
   "name": "veritable-authority",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Front-end for Veritable authority",
   "author": "Digital Catapult (https://www.digicatapult.org.uk/)",
   "license": "Apache-2.0",
@@ -9,16 +9,16 @@
     "url": "git+https://github.com/digicatapult/veritable-authority.git"
   },
   "engines": {
-    "node": "16.x.x",
-    "npm": "8.x.x"
+    "node": "18.x.x",
+    "npm": "9.x.x"
   },
   "dependencies": {
     "buffer": "^6.0.3",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-json-view": "^1.21.3",
-    "react-scripts": "^5.0.0"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -43,22 +43,22 @@
     ]
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.17.0",
-    "@babel/preset-react": "^7.16.7",
-    "@cypress/react": "^5.12.4",
-    "@cypress/webpack-dev-server": "^1.8.3",
-    "cypress": "^9.5.2",
-    "eslint": "^8.10.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-import": "^2.25.4",
+    "@babel/eslint-parser": "^7.21.8",
+    "@babel/preset-react": "^7.22.3",
+    "@cypress/react": "^7.0.3",
+    "@cypress/webpack-dev-server": "^3.4.1",
+    "cypress": "^12.14.0",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-cypress": "^2.13.3",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "husky": "^4.3.8",
-    "lint-staged": "^12.3.3",
-    "prettier": "^2.5.1"
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8"
   },
   "husky": {
     "hooks": {
