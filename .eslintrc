@@ -41,24 +41,5 @@
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": ["error", { "ignoreRestSiblings": true }]
-  },
-  "overrides": [
-    {
-      "files": ["**/*.{spec,test}.js", "./cypress/plugins/*.js"],
-      "rules": {
-        "prettier/prettier": "warn",
-        "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
-        "cypress/no-assigning-return-values": "error",
-        "cypress/no-unnecessary-waiting": "error",
-        "cypress/assertion-before-screenshot": "warn",
-        "cypress/no-force": "warn",
-        "cypress/no-async-tests": "error",
-        "cypress/no-pause": "error"
-      },
-      "env": {
-        "cypress/globals": true,
-        "node": true
-      }
-    }
-  ]
+  }
 }
