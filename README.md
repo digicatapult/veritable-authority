@@ -16,45 +16,6 @@ To start the application, run:
 npm start
 ```
 
-<<<<<<< HEAD
-## Testing
-                                                                                                                                          
-> Framework - [CYPRESS](https://docs.cypress.io/)                                                                                         
-There are two types of tests one for React component as per individual basis and integration for testing different flows. The idea is that component test will be triggered after update to branch excluding **main** and integration for release build or after it has been merged with **main**.                                                       
-                                  
-Before running any tests please make sure you have cypress environment variables present. By the default cypress will read all environment variables prefixed with `CYPRESS_` which can be accessed using `Cypress.env('VAR_NAME')` method. The main reason why **integration** test was excluded from branch check is because we have a limit of **auth0** request.
-
-A list of variables currently used in this repo
-```sh                                                                
-CYPRESS_TEST_USERNAME='username' # Cypress.env('TEST_USERNAME')
-CYPRESS_TEST_PASSWORD='password'
-```                  
-                                                                                                                                          
-> Run component tests -> `npm t`                                     
-> Run integration tests -> `npm run test:integration`
-> Plugins are configured in `cyopress/plugins/` folder
-                                                                     
-- **Component tests**
-  - Uses webpack so does not require a build and run [cypress/webpack-dev-server](https://npm.io/package/@cypress/webpack-dev-server)
-  - Each component can be tested in isolocation
-- **Integration**                                                                                                                         
-  - Will start as a service
-  - Allows us to mock external endpoints
-                
-#### Local development using Cypress
-
-Cypress can also be utilised in local development when you require other services you can mock out `api` responses and run under the watch flag.                                                               
-```sh
-npm run test:dev
-```
-                                  
-#### TODO
-- [ ] - include **integration** tests as part of github checks
-
-=======
->>>>>>> main
----
-
 ## Interacting with the ACA Swagger API Layer directly
 
 **[README](https://gist.github.com/andysign/145188bc361ea9dd7e44db1a5a8a282a)**
