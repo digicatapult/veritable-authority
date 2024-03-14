@@ -1,5 +1,9 @@
 # veritable-authority
 
+## Deprecation Notice
+This application was deprecated on March 14th 2024, there will be no further dependency or security updates.
+---
+
 ## Description
 
 Front-end for a Regulator ( Safe2Fly ) in Veritable. Issue licenses, verify licenses and view license that have been previously created holders.
